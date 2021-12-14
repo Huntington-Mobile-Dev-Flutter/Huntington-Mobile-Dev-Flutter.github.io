@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Clean Framework Code Lab
 
 This is the source repository for the [Clean Framework Code Lab][cfcl] site.
@@ -19,3 +20,6 @@ $ ./site/RunCodeLabs.command
 [cfcl] https://huntington-mobile-dev-flutter.github.io/
 [prerequisites] ./site/README.md#prerequisites "prerequisites for bulding the site"
 [site-readme] ./site/README.md "developer details for building and publishing this site"
+=======
+# Huntington-Mobile-Dev-Flutter.github.io
+>>>>>>> 97f0418e (Initial commit)
