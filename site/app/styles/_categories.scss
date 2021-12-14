@@ -47,25 +47,25 @@ $color-weave-green: #0f9d58;
 /* Mixins */
 
 @mixin codelab-card($categories, $color, $icon) {
-  %bg-#{$color} {
+  %bg-#{str-slice(#{$color}, 2)} {
     background-color: $color;
   }
 
-  %border-#{$color} {
+  %border-#{str-slice(#{$color}, 2)} {
     border-bottom-color: $color;
   }
 
   %icon-#{$icon} {
-    background-image: url('/images/icons/#{$icon}');
+    background-image: url('/images/icons/#{$icon}.svg');
   }
 
   @each $category in $categories {
     .codelab-card.category-#{$category} {
-      @extend %border-#{$color};
+      @extend %border-#{str-slice(#{$color}, 2)};
     }
 
     .#{$category}-bg {
-      @extend %bg-#{$color};
+      @extend %bg-#{str-slice(#{$color}, 2)};
     }
 
     .#{$category}-icon {
@@ -77,125 +77,125 @@ $color-weave-green: #0f9d58;
 /* Actual CSS classes */
 
 @include codelab-card(['about'],
-  $color-google-blue, 'google-g.svg');
+  $color-google-blue, 'google-g');
 
 @include codelab-card(['ads'],
-  $color-google-blue, 'google-ads.svg');
+  $color-google-blue, 'google-ads');
 
 @include codelab-card(['analytics'],
-  $color-analytics-orange, 'google-analytics.svg');
+  $color-analytics-orange, 'google-analytics');
 
 @include codelab-card(['android', 'android-kotlin', 'android-tv'],
-  $color-android-green, 'android.svg');
+  $color-android-green, 'android');
 @include codelab-card(['android-auto'],
-  $color-android-auto-blue, 'android-auto.svg');
+  $color-android-auto-blue, 'android-auto');
 @include codelab-card(['android-things'],
-  $color-android-things-grey, 'android-things.svg');
+  $color-android-things-grey, 'android-things');
 @include codelab-card(['android-wear'],
-$color-google-blue, 'wear-os.svg');
+$color-google-blue, 'wear-os');
 
 @include codelab-card(['assistant'],
-  $color-google-blue, 'google-assistant.svg');
+  $color-google-blue, 'google-assistant');
 
 @include codelab-card(['ar', 'ar-core', 'augmented-reality', 'augmented-reality-core'],
-  $color-ar-core-purple, 'ar-core.svg');
+  $color-ar-core-purple, 'ar-core');
 
 @include codelab-card(['cardboard', 'games', 'play-games', 'vr', 'virtualreality', 'virtualreality-games', 'virtual-reality', 'virtual-reality-games'],
-  $color-cardboard-brown, 'cardboard.svg');
+  $color-cardboard-brown, 'cardboard');
 
 @include codelab-card(['gsuite', 'g-suite', 'apps'],
-  $color-google-grey, 'gsuite.svg');
+  $color-google-grey, 'gsuite');
 @include codelab-card(['docs'],
-  $color-google-blue, 'google-docs.svg');
+  $color-google-blue, 'google-docs');
 @include codelab-card(['drive'],
-  $color-google-blue, 'google-drive.svg');
+  $color-google-blue, 'google-drive');
 @include codelab-card(['sheets'],
-  $color-google-green, 'google-sheets.svg');
+  $color-google-green, 'google-sheets');
 @include codelab-card(['slides'],
-  $color-google-yellow, 'google-slides.svg');
+  $color-google-yellow, 'google-slides');
 
 @include codelab-card(['blockly'],
-  $color-blockly-blue, 'blockly.svg');
+  $color-blockly-blue, 'blockly');
 
 @include codelab-card(['brillo'],
-  $color-brillo-blue, 'brillo.svg');
+  $color-brillo-blue, 'brillo');
 
 @include codelab-card(['cast', 'chromecast', 'chrome-cast'],
-  $color-cast-grey, 'cast.svg');
+  $color-cast-grey, 'cast');
 
 @include codelab-card(['chrome', 'google-chrome', 'googlechrome'],
-  $color-google-blue, 'chrome.svg');
+  $color-google-blue, 'chrome');
 
 @include codelab-card(['cloud', 'cloud-about', 'cloud-general', 'cloud-other', 'cloud-others', 'cloud-platform', 'cloud-tools', 'cloud-cloud-tools'],
-  $color-google-blue, 'cloud-platform.svg');
+  $color-google-blue, 'cloud-platform');
 
 @include codelab-card(['cloud-appengine', 'cloud-app-engine'],
-  $color-google-blue, 'cloud-appengine.svg');
+  $color-google-blue, 'cloud-appengine');
 @include codelab-card(['cloud-bigquery', 'cloud-big-query', 'bigquery', 'big-query'],
-  $color-google-blue, 'cloud-bigquery.svg');
+  $color-google-blue, 'cloud-bigquery');
 @include codelab-card(['cloud-build'],
-  $color-google-blue, 'cloud-build.svg');
+  $color-google-blue, 'cloud-build');
 @include codelab-card(['cloud-compute', 'cloud-compute-engine'],
-  $color-google-blue, 'cloud-compute-engine.svg');
+  $color-google-blue, 'cloud-compute-engine');
 @include codelab-card(['cloud-data'],
-  $color-google-blue, 'cloud-sql.svg'); // This exists, but it's the logo for Cloud SQL /shrug
+  $color-google-blue, 'cloud-sql'); // This exists, but it's the logo for Cloud SQL /shrug
 @include codelab-card(['cloud-datalab', 'cloud-data-lab'],
-  $color-google-blue, 'cloud-datalab.svg');
+  $color-google-blue, 'cloud-datalab');
 @include codelab-card(['cloud-iam'],
-  $color-google-blue, 'cloud-iam.svg');
+  $color-google-blue, 'cloud-iam');
 @include codelab-card(['cloud-iot', 'cloud-iot-core', 'iot-core', 'iot'],
-  $color-google-blue, 'cloud-iot-core.svg');
+  $color-google-blue, 'cloud-iot-core');
 @include codelab-card(['cloud-key-management-service', 'cloud-kms'],
-  $color-google-blue, 'cloud-key-management-service.svg');
+  $color-google-blue, 'cloud-key-management-service');
 @include codelab-card(['cloud-ml', 'cloud-machine-learning'],
-  $color-google-blue, 'cloud-machine-learning.svg');
+  $color-google-blue, 'cloud-machine-learning');
 @include codelab-card(['cloud-monitoring', 'cloud-monitor'],
-  $color-google-blue, 'cloud-monitoring.svg');
+  $color-google-blue, 'cloud-monitoring');
 @include codelab-card(['cloud-networking', 'cloud-network'],
-  $color-google-blue, 'cloud-networking.svg');
+  $color-google-blue, 'cloud-networking');
 @include codelab-card(['cloud-security', 'cloud-security-command-center'],
-  $color-google-blue, 'cloud-security-command-center.svg');
+  $color-google-blue, 'cloud-security-command-center');
 @include codelab-card(['cloud-sql'],
-  $color-google-blue, 'cloud-sql.svg');
+  $color-google-blue, 'cloud-sql');
 @include codelab-card(['cloud-web'],
-  $color-google-blue, 'web.svg');
+  $color-google-blue, 'web');
 
 @include codelab-card(['design'],
-  $color-design-grey, 'design.svg');
+  $color-design-grey, 'design');
 
 @include codelab-card(['firebase', 'firebase-web'],
-  $color-firebase-orange, 'firebase.svg');
+  $color-firebase-orange, 'firebase');
 
 @include codelab-card(['flutter', 'flutter-firebase',
                        'flutter-android', 'design-flutter'],
-  $color-flutter-blue, 'flutter.svg');
+  $color-flutter-blue, 'flutter');
 
 @include codelab-card(['google-maps', 'googlemaps', 'maps', 'geo'],
-  $color-google-maps-green, 'google-maps.svg');
+  $color-google-maps-green, 'google-maps');
 
 @include codelab-card(['nest'],
-  $color-nest-grey, 'nest.svg');
+  $color-nest-grey, 'nest');
 
 @include codelab-card(['openthread', 'open-thread'],
-  $color-openthread-grey, 'openthread.svg');
+  $color-openthread-grey, 'openthread');
 
 @include codelab-card(['search'],
-  $color-google-blue, 'google-g.svg');
+  $color-google-blue, 'google-g');
 
 @include codelab-card(['slurm', 'hpc', 'cloud-hpc'],
-  $color-slurm-blue, 'slurm.svg');
+  $color-slurm-blue, 'slurm');
 
 @include codelab-card(['tensorflow', 'tensor-flow'],
-  $color-tensorflow-orange, 'tensorflow.svg');
+  $color-tensorflow-orange, 'tensorflow');
 
 @include codelab-card(['unity'],
-  $color-unity-grey, 'unity.svg');
+  $color-unity-grey, 'unity');
 
 @include codelab-card(['weave'],
-$color-weave-green, 'weave.svg');
+$color-weave-green, 'weave');
 
 @include codelab-card(['wear', 'wear-os'],
-  $color-google-blue, 'wear-os.svg');
+  $color-google-blue, 'wear-os');
 
 @include codelab-card(['web'],
-  $color-google-blue, 'web.svg');
+  $color-google-blue, 'web');
