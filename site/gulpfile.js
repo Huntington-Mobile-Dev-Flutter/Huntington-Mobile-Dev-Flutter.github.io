@@ -31,7 +31,6 @@ const childprocess = require('child_process');
 const claat = require('./tasks/helpers/claat');
 const del = require('del');
 const fs = require('fs-extra');
-const gcs = require('./tasks/helpers/gcs');
 const glob = require('glob');
 const opts = require('./tasks/helpers/opts');
 const path = require('path');
@@ -74,22 +73,9 @@ const CODELABS_FORMAT = args.codelabsFormat || 'html';
 // CODELABS_NAMESPACE is the content namespace.
 const CODELABS_NAMESPACE = (args.codelabsNamespace || 'codelabs').replace(/^\/|\/$/g, '');
 
-// DELETE_MISSING controls whether missing files at the destination are deleted.
-// The default value is true.
-const DELETE_MISSING = !!args.deleteMissing || false;
-
-// DRY_RUN indicates if dry should be used.
-const DRY_RUN = !!args.dry;
-
 // GH_PAGES_DIR is the location of the GitHub Pages publish directory.
 // not accepting argument overrides, as the directory is outside the working directory and gets emptied during publish
 const GH_PAGES_DIR = '../docs';
-
-// PROD_BUCKET is the default bucket for prod.
-const PROD_BUCKET = gcs.bucketName(args.prodBucket || 'DEFAULT_PROD_BUCKET');
-
-// STAGING_BUCKET is the default bucket for staging.
-const STAGING_BUCKET = gcs.bucketName(args.stagingBucket || 'DEFAULT_STAGING_BUCKET');
 
 // VIEWS_FILTER is the filter to use for view inclusion.
 const VIEWS_FILTER = args.viewsFilter || '*';
@@ -305,8 +291,7 @@ gulp.task('dist:codelabs', (done) => {
   done();
 });
 
-// dist packages the build for distribution, compressing and condensing where
-// appropriate.
+// dist packages the build for distribution, compressing and condensing where appropriate.
 gulp.task('dist', gulp.series(
   'clean',
   'dist:codelabs',
@@ -315,12 +300,20 @@ gulp.task('dist', gulp.series(
   'minify',
 ));
 
-// pages copies the contents of dist to the specified GitHub Pages publish directory
-gulp.task('pages', gulp.series('dist', (done) => {
-  fs.emptyDirSync(GH_PAGES_DIR);
-  fs.copySync('dist', GH_PAGES_DIR);
+// docs copies the contents of dist to the specified GitHub Pages publish directory.
+gulp.task('docs', (done) => {
+  if (fs.existsSync('dist')) {
+    fs.emptyDirSync(GH_PAGES_DIR);
+    fs.copySync('dist', GH_PAGES_DIR);
+  }
   done();
-}));
+});
+
+// pages prepares content for publishing on GitHub Pages.
+gulp.task('pages', gulp.series(
+  'dist',
+  'docs',
+));
 
 // watch:css watches css files for changes and re-builds them
 gulp.task('watch:css', () => {
@@ -387,9 +380,11 @@ gulp.task('serve:pages', gulp.series('pages', () => {
     .pipe(webserver(opts.webserver()));
 }));
 
+
 //
 // Codelabs
 //
+
 // codelabs:export exports the codelabs
 gulp.task('codelabs:export', (callback) => {
   const source = args.source;
@@ -402,7 +397,6 @@ gulp.task('codelabs:export', (callback) => {
     claat.run(CODELABS_DIR, 'update', CODELABS_ENVIRONMENT, CODELABS_FORMAT, DEFAULT_GA, codelabIds, callback);
   }
 });
-
 
 
 //
@@ -484,7 +478,6 @@ const defaultViewMetadata = () => {
   }
   return _defaultViewMetadata;
 }
-
 
 // Parse view.json and codelab.json files in all directories. Value returned in
 // the callback is an object:
@@ -941,35 +934,3 @@ const collectCodelabs = () => {
 
   return codelabs;
 }
-
-// publish:staging:codelabs uploads the dist folder codelabs to a staging
-// bucket. This only uploads the codelabs, the views remain unchanged.
-gulp.task('publish:staging:codelabs', (callback) => {
-  const opts = { dry: DRY_RUN, deleteMissing: DELETE_MISSING };
-  const src = path.join('dist', CODELABS_NAMESPACE, '/');
-  const dest = gcs.bucketFolderPath(STAGING_BUCKET, CODELABS_NAMESPACE);
-  gcs.rsync(src, dest, opts, callback);
-});
-
-// publish:staging:views uploads the dist folder views and associated assets to
-// a staging bucket. This does not upload any of the codelabs.
-gulp.task('publish:staging:views', (callback) => {
-  const opts = { exclude: CODELABS_NAMESPACE, dry: DRY_RUN, deleteMissing: DELETE_MISSING };
-  gcs.rsync('dist', STAGING_BUCKET, opts, callback);
-});
-
-// publish:prod:codelabs syncs codelabs from the staging to the production
-// bucket.
-gulp.task('publish:prod:codelabs', (callback) => {
-  const opts = { dry: DRY_RUN, deleteMissing: DELETE_MISSING };
-  const src = gcs.bucketFolderPath(STAGING_BUCKET, CODELABS_NAMESPACE);
-  const dest = gcs.bucketFolderPath(PROD_BUCKET, CODELABS_NAMESPACE);
-  gcs.rsync(src, dest, opts, callback);
-});
-
-// publish:prod:views syncs views and associated assets from the staging to the
-// production bucket.
-gulp.task('publish:prod:views', (callback) => {
-  const opts = { exclude: CODELABS_NAMESPACE, dry: DRY_RUN, deleteMissing: DELETE_MISSING };
-  gcs.rsync(STAGING_BUCKET, PROD_BUCKET, opts, callback);
-});
