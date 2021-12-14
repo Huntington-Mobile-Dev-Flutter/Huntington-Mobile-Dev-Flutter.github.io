@@ -1,0 +1,30 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-10T16:46:26-04:00",
+  "id": "clean_service_calls",
+  "duration": 20,
+  "title": "Clean - Creating a Service Call",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - Creating a Service Call",
+  "source": "clean_service_calls.md",
+  "theme": "",
+  "status": [
+    "active"
+  ],
+  "category": [
+    "flutter"
+  ],
+  "tags": [
+    "api",
+    "api service",
+    "clean service",
+    "flutter",
+    "rest",
+    "rest service",
+    "service"
+  ],
+  "url": "clean_service_calls"
+}

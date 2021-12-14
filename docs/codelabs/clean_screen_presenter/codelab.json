@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-12T09:30:40-04:00",
+  "id": "clean_screen_presenter",
+  "duration": 10,
+  "title": "Clean - The Screen and Presenter",
+  "authors": "Alireza Khakpour",
+  "summary": "Clean - The Screen and Presenter",
+  "source": "clean_screen_presenter.md",
+  "theme": "",
+  "status": [
+    "active"
+  ],
+  "category": [
+    "flutter"
+  ],
+  "tags": [
+    "presenter",
+    "scerrn",
+    "test",
+    "ui",
+    "widget test"
+  ],
+  "url": "clean_screen_presenter"
+}

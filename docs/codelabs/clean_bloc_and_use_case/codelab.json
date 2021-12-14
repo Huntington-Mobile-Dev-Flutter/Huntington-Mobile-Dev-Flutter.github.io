@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-14T17:24:11-04:00",
+  "id": "clean_bloc_and_use_case",
+  "duration": 10,
+  "title": "Clean - The BLoC and Use Case",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - The Bloc and Use Case",
+  "source": "clean_bloc_and_use_case.md",
+  "theme": "",
+  "status": [
+    "active"
+  ],
+  "category": [
+    "flutter"
+  ],
+  "tags": [
+    "bloc",
+    "clean",
+    "flutter",
+    "service",
+    "use case"
+  ],
+  "url": "clean_bloc_and_use_case"
+}
