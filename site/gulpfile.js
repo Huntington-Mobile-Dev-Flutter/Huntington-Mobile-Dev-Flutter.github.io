@@ -60,7 +60,7 @@ const BASE_URL = args.baseUrl || 'https://example.com';
 // CODELABS_DIR is the directory where the actual codelabs exist on disk.
 // Despite being a constant, this can be overridden with the --codelabs-dir
 // flag.
-const CODELABS_DIR = args.codelabsDir || '.';
+const CODELABS_DIR = args.codelabsDir || './codelabs';
 
 // CODELABS_ENVIRONMENT is the environment for which to build codelabs.
 const CODELABS_ENVIRONMENT = args.codelabsEnv || 'web';
@@ -80,6 +80,10 @@ const DELETE_MISSING = !!args.deleteMissing || false;
 
 // DRY_RUN indicates if dry should be used.
 const DRY_RUN = !!args.dry;
+
+// GH_PAGES_DIR is the location of the GitHub Pages publish directory.
+// not accepting argument overrides, as the directory is outside the working directory and gets emptied during publish
+const GH_PAGES_DIR = '../docs';
 
 // PROD_BUCKET is the default bucket for prod.
 const PROD_BUCKET = gcs.bucketName(args.prodBucket || 'DEFAULT_PROD_BUCKET');
@@ -227,10 +231,8 @@ gulp.task('build:vulcanize', () => {
     .pipe(gulp.dest('build'));
 });
 
-// build builds all the assets
-gulp.task('build', gulp.series(
-  'clean',
-  'build:codelabs',
+// build:site generates the web assets
+gulp.task('build:site', gulp.series(
   'build:css',
   'build:scss',
   'build:html',
@@ -240,8 +242,15 @@ gulp.task('build', gulp.series(
   'build:vulcanize',
 ));
 
-// copy copies the built artifacts in build into dist/
-gulp.task('copy', (callback) => {
+// build generates a local site for test viewing with serve
+gulp.task('build', gulp.series(
+  'clean',
+  'build:codelabs',
+  'build:site',
+));
+
+// rename claims the built artifacts in build/ as dist/
+gulp.task('rename', (callback) => {
   // Explicitly do not use gulp here. It's too slow and messes up the symlinks
   fs.rename('build', 'dist', callback);
 });
@@ -289,13 +298,29 @@ gulp.task('minify', gulp.parallel(
   'minify:js',
 ));
 
+// dist:codelabs copies the codelabs into the build dir (which gets renamed to dist).
+gulp.task('dist:codelabs', (done) => {
+  const no_symlink = false;
+  copyFilteredCodelabs('build', no_symlink);
+  done();
+});
+
 // dist packages the build for distribution, compressing and condensing where
 // appropriate.
 gulp.task('dist', gulp.series(
-  'build',
-  'copy',
+  'clean',
+  'dist:codelabs',
+  'build:site',
+  'rename',
   'minify',
 ));
+
+// pages copies the contents of dist to the specified GitHub Pages publish directory
+gulp.task('pages', gulp.series('dist', (done) => {
+  fs.emptyDirSync(GH_PAGES_DIR);
+  fs.copySync('dist', GH_PAGES_DIR);
+  done();
+}));
 
 // watch:css watches css files for changes and re-builds them
 gulp.task('watch:css', () => {
@@ -349,10 +374,16 @@ gulp.task('serve', gulp.series(
 ));
 
 // serve:dist serves the built and minified website from dist. It does not
-// support live-reloading and should be used to verify final output before
-// publishing.
+// support live-reloading and should be used to verify final output before publishing.
 gulp.task('serve:dist', gulp.series('dist', () => {
   return gulp.src('dist')
+    .pipe(webserver(opts.webserver()));
+}));
+
+// serve:pages serves the built and minified website from GH_PAGES_DIR. It does not
+// support live-reloading and should be used to verify final output before publishing.
+gulp.task('serve:pages', gulp.series('pages', () => {
+  return gulp.src(GH_PAGES_DIR)
     .pipe(webserver(opts.webserver()));
 }));
 
@@ -842,14 +873,15 @@ const sortCodelabs = (codelabs, view) => {
 // expression or view regular expression into the build/ folder. If no filters
 // are specified (i.e. if codelabRe and viewRe are both undefined), then this
 // function returns all codelabs in the codelabs directory.
-const copyFilteredCodelabs = (dest) =>  {
+const copyFilteredCodelabs = (dest, symlink=true) =>  {
   // No filters were specified, symlink the codelabs folder directly and save
   // processing.
   if (CODELABS_FILTER === '*' && VIEWS_FILTER === '*') {
     const source = path.join(CODELABS_DIR);
     const target = path.join(dest, CODELABS_NAMESPACE);
-    fs.ensureSymlinkSync(source, target, 'dir');
-    return
+    if (symlink) { fs.ensureSymlinkSync(source, target, 'dir'); }
+    else { fs.copySync(source, target); }
+    return;
   }
 
   const codelabs = collectCodelabs();
@@ -858,7 +890,8 @@ const copyFilteredCodelabs = (dest) =>  {
     const codelab = codelabs[i];
     const source = path.join(CODELABS_DIR, codelab.id);
     const target = path.join(dest, CODELABS_NAMESPACE, codelab.id);
-    fs.ensureSymlinkSync(source, target, 'dir');
+    if (symlink) { fs.ensureSymlinkSync(source, target, 'dir'); }
+    else { fs.copySync(source, target); }
   }
 };
 
