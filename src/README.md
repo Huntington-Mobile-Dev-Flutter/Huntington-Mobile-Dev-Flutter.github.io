@@ -1,19 +1,24 @@
 # Website for Clean Framework Codelab
 
-This project is where the codelab site is built from.
+This directory is where the codelab site is built from, 
+with artifacts landing in `../docs` for publication by GitHub Pages.
 
 
 ## Prerequisites
 
-The project requires the following major dependencies:
+To build the site, the following main dependencies need to be installed:
 
-- [Go](https://golang.org/dl/) language
-- [Node.js](https://nodejs.org/en/download/) v10+ and [npm](https://www.npmjs.com/get-npm)
-- [gsutil](https://cloud.google.com/storage/docs/gsutil_install)
-- [claat](https://github.com/googlecodelabs/tools/tree/master/claat#install)
-  - _note:_ you DO NOT need to clone claat. It is already a part of the repo, and you do not need to "Make" it.
+- [Node.js](https://nodejs.org/en/download/) v10+ 
+- [npm](https://www.npmjs.com/get-npm)
+- [gulp](https://www.npmjs.com/package/gulp)
 
-With Node installed, run `npm install` in the root of the `site` (this folder):
+Quick check of pre-requisites:
+
+```console
+$ ./CheckPrereqs.command
+```
+
+With Node installed, run `npm install` in this directory (`src`):
 
 ```console
 $ npm install
@@ -24,10 +29,10 @@ $ npm install
 
 ### Serve
 
-To serve the site in dev mode, run `gulp serve`, passing a path to a directory
-with the codelabs content as an argument. This will compile all the views and
-codelabs into the `build/` directory and start a web server to serve that
-content.
+To serve the site in dev mode, run `gulp serve`, optionally passing a path to 
+a directory with the codelabs content as an argument. This will compile all the 
+views and codelabs into the `build/` directory and start a web server to serve 
+that content.
 
 ```console
 $ gulp serve
@@ -58,7 +63,7 @@ To add a new view:
 id will appear in the URL, the name should be sluggified, meaning all lowercase
 with special characters replaced with dashes.
 
-    ```console
+    ```text
     // General example
     My Codelab -> my-codelab
 
@@ -69,8 +74,7 @@ with special characters replaced with dashes.
     Tracking with utm_source -> tracking-with-utm_source
     ```
 
-1. Add a new file named `view.json` inside this folder. Here is a template
-`view.json`:
+1. Add a new file named `view.json` inside this folder. Here is a template `view.json`:
 
     ```javascript
     // app/views/my-event/view.json
