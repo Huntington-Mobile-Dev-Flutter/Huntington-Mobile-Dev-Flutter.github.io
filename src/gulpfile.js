@@ -302,16 +302,16 @@ gulp.task('dist', gulp.series(
 
 // docs copies the contents of dist to the specified GitHub Pages publish directory.
 gulp.task('docs', (done) => {
-  if (fs.existsSync('dist')) {
+  if (fs.existsSync('build')) {
     fs.emptyDirSync(GH_PAGES_DIR);
-    fs.copySync('dist', GH_PAGES_DIR);
+    fs.copySync('build', GH_PAGES_DIR, { dereference: true });
   }
   done();
 });
 
 // pages prepares content for publishing on GitHub Pages.
 gulp.task('pages', gulp.series(
-  'dist',
+  'build',
   'docs',
 ));
 
