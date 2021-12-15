@@ -16,6 +16,6 @@ $ ./site/RunCodeLabs.command
 
 
 
-[cfcl] https://huntington-mobile-dev-flutter.github.io/
-[prerequisites] ./site/README.md#prerequisites "prerequisites for bulding the site"
-[site-readme] ./site/README.md "developer details for building and publishing this site"
+[cfcl]: https://huntington-mobile-dev-flutter.github.io/
+[prerequisites]: ./site/README.md#prerequisites "prerequisites for bulding the site"
+[site-readme]: ./site/README.md "developer details for building and publishing this site"
