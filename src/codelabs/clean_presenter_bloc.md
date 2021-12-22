@@ -1,7 +1,7 @@
 summary: Clean - Presenter and Bloc
 id: clean_presenter_bloc
 categories: Mobile Development with Flutter
-tags: Clean Framework, Flutter, Clean Architecture
+tags: Clean Architecture, Flutter
 status:  Active
 authors: Alireza Khakpour
 
@@ -18,7 +18,7 @@ g { color: Green }
 
 ![Presentation - Bloc](clean_presenter_bloc/bloc_presenter.png)
 - **Presenter** : Creates Screen based on `BuildContext`, `BLoC`, and `ViewModel`, and support screen action.
-- **BLoC** : The Bloc component, manage state across the app and routes data to other parts of the Framework.
+- **BLoC** : The Bloc component, manage state across the app and routes data to other parts of the architecture.
 
 ## Presenter
 

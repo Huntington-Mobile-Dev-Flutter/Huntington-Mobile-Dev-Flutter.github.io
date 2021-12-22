@@ -20,9 +20,9 @@ A use case should be placed under bloc folder and named with suffix **_usecase.d
 ## BLoC
 Business Logic Component (BLoC), the core of the feature. 
 - A bloc should be placed under bloc folder and named with suffix **_bloc.dart**. 
-- A bloc should extend from **Bloc**(a class defined by clean_framework).
-- A bloc can have multiple **Pipe**(a class defined by clean_framework, a wrapper of StreamController).
-- A bloc can have multiple **UseCase**(a class defined by clean_framework).
+- A bloc should extend from **Bloc**.
+- A bloc can have multiple **Pipe** (a wrapper of StreamController).
+- A bloc can have multiple **UseCase**.
 - All pipes must be disposed in dispose function of the bloc.
 
         class DemoBloc extends Bloc {
@@ -49,8 +49,8 @@ Business Logic Component (BLoC), the core of the feature.
 ## Use Case
 A specific use case of the feature.
 - A use case should be placed under bloc folder and named with suffix **_usecase.dart**.
-- A use case should extend from **UseCase**(a class defined by clean_framework).
-- A use case can have multiple **ViewModelCallback**(a type defined by clean_framework with a generic ViewModel type).
+- A use case should extend from **UseCase**.
+- A use case can have multiple **ViewModelCallback** (a type with a generic ViewModel type).
 - Create specific methods to handle specific logic.
 - All results must be push back to bloc via callback.
 

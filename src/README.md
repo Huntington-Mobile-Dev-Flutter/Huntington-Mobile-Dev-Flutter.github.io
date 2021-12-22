@@ -1,4 +1,4 @@
-# Website for Clean Framework Codelab
+# Website for Clean Architecture Codelab
 
 This directory is where the codelab site is built from, 
 with artifacts landing in `../docs` for publication by GitHub Pages.

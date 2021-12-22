@@ -1,6 +1,6 @@
-# Clean Framework Code Lab
+# Clean Architecture Code Lab
 
-This is the source repository for the [Clean Framework Code Lab][cfcl] site.
+This is the source repository for the [Clean Architecture Code Lab][cacl] site.
 
 
 ## Developers
@@ -17,6 +17,6 @@ $ ./src/RunCodeLabs.command
 
 
 
-[cfcl]: https://huntington-mobile-dev-flutter.github.io/
+[cacl]: https://huntington-mobile-dev-flutter.github.io/
 [prerequisites]: ./src/README.md#prerequisites "prerequisites for bulding the site"
 [src-readme]: ./src/README.md "developer details for building and publishing this site"

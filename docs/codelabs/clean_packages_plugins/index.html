@@ -65,7 +65,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="How add a package to clean framework" duration="0">
+      <google-codelab-step label="How add a package cleanly" duration="0">
         <p class="image-container"><img alt="Presentation Layer" src="img/dependency_directory.png"></p>
         
         <p class="ex1">All packages should be in the <code>dependency</code> directory.  usually, the usage of package functionality is in Domain Layer within business logic, imagine for any reason in future we want to swap the package for something different. If we used it directly inside the Usecase we would need to change a lot of code. But by hiding 3rd party library in a class we control, there won't much code to change. So we should wrap package functionality with a class that is inherited from <code>ExternalDependency</code>. </p>

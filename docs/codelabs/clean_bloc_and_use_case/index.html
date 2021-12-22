@@ -41,9 +41,9 @@
         <p>Business Logic Component (BLoC), the core of the feature.</p>
 <ul>
 <li>A bloc should be placed under bloc folder and named with suffix <strong>_bloc.dart</strong>.</li>
-<li>A bloc should extend from <strong>Bloc</strong>(a class defined by clean_framework).</li>
-<li>A bloc can have multiple <strong>Pipe</strong>(a class defined by clean_framework, a wrapper of StreamController).</li>
-<li>A bloc can have multiple <strong>UseCase</strong>(a class defined by clean_framework).</li>
+<li>A bloc should extend from <strong>Bloc</strong>.</li>
+<li>A bloc can have multiple <strong>Pipe</strong> (a wrapper of StreamController).</li>
+<li>A bloc can have multiple <strong>UseCase</strong>.</li>
 <li>All pipes must be disposed in dispose function of the bloc.  <pre><code>class DemoBloc extends Bloc {
     final viewModelPipe = Pipe&lt;DemoViewModel&gt;();
 
@@ -78,8 +78,8 @@
         <p>A specific use case of the feature.</p>
 <ul>
 <li>A use case should be placed under bloc folder and named with suffix <strong>_usecase.dart</strong>.</li>
-<li>A use case should extend from <strong>UseCase</strong>(a class defined by clean_framework).</li>
-<li>A use case can have multiple <strong>ViewModelCallback</strong>(a type defined by clean_framework with a generic ViewModel type).</li>
+<li>A use case should extend from <strong>UseCase</strong>.</li>
+<li>A use case can have multiple <strong>ViewModelCallback</strong> (a type with a generic ViewModel type).</li>
 <li>Create specific methods to handle specific logic.</li>
 <li>All results must be push back to bloc via callback.  <pre><code>class DemoUseCase extends UseCase {
     ViewModelCallback&lt;DemoViewModel&gt;? fetchDataCallback;

@@ -53,7 +53,7 @@ To create your service class, you need to extend EitherService and 2 generic typ
     class DemoService extends EitherService<DemoRequestModel, DemoResponseModel> {
         DemoService({RestApi restApi}) : super(
             method: RestMethod.get,
-            restApi: restApi,//extends from RestApi, RestApi is a class of Clean_Framework 
+            restApi: restApi,//extends from RestApi 
             path: "/demo");
     }
 

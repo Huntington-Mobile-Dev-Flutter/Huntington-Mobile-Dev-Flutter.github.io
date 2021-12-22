@@ -6,7 +6,7 @@
   "updated": "2021-05-18T18:38:42-04:00",
   "id": "clean_packages_plugins",
   "duration": 10,
-  "title": "Clean Framework and External Dependency",
+  "title": "Clean Architecture and External Dependencies",
   "authors": "Alireza Khakpour",
   "summary": "Clean - External Dependency",
   "source": "clean_packages_plugins.md",

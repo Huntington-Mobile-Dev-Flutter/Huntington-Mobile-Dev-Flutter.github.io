@@ -26,7 +26,6 @@ To access Pub is the package manager for the Dart programming language, containi
 
 ## How select a good package
 
-
 - High overall package score
 - Prefer permissive license
 - GitHub version tag matches the current version from pub.dev
@@ -39,11 +38,9 @@ To access Pub is the package manager for the Dart programming language, containi
 
 
 
-## How add a package to clean framework
-
+## How add a package cleanly
 
 ![Presentation Layer](clean_packages_plugins/dependency.png)
-
 
 > We should use a wrapper for plugin functionality. The usage of plugin is in bloc or use case, imagine for any reason in future we want to swap the plugin for something different. If we used it directly inside the Usecase we would need to change Lot of code. but by hiding 3rd party library an a class we control it, there won't much code to change at all.
 
