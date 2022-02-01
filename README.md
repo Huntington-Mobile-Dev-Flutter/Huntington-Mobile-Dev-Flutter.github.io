@@ -18,5 +18,5 @@ $ ./src/RunCodeLabs.command
 
 
 [cacl]: https://huntington-mobile-dev-flutter.github.io/
-[prerequisites]: ./src/README.md#prerequisites "prerequisites for bulding the site"
+[prerequisites]: ./src/README.md#prerequisites "prerequisites for building the site"
 [src-readme]: ./src/README.md "developer details for building and publishing this site"
